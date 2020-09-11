@@ -1,5 +1,5 @@
 group 'com.github.nirmalc'
-version '7.2.0'
+version '7.9.1'
 
 
 ext {
@@ -19,7 +19,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "org.elasticsearch.gradle:build-tools:7.2.0"
+        classpath "org.elasticsearch.gradle:build-tools:7.9.1"
     }
 }
 
@@ -41,7 +41,7 @@ esplugin {
 }
 
 dependencies {
-    compile 'org.elasticsearch:elasticsearch:7.2.0'
+    compile 'org.elasticsearch:elasticsearch:7.9.1'
 }
 
 

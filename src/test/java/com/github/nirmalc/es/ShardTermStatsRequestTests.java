@@ -23,8 +23,7 @@ public class ShardTermStatsRequestTests extends ESTestCase {
         ShardTermStatsRequest shardTermStatsRequest = new ShardTermStatsRequest(index, shardId, termStatsRequest);
         BytesStreamOutput bytesStreamOutput = new BytesStreamOutput();
         shardTermStatsRequest.writeTo(bytesStreamOutput);
-        ShardTermStatsRequest shardTermStatsRequest1 = new ShardTermStatsRequest();
-        shardTermStatsRequest1.readFrom(bytesStreamOutput.bytes().streamInput());
+        ShardTermStatsRequest shardTermStatsRequest1 = new ShardTermStatsRequest(bytesStreamOutput.bytes().streamInput());
         assertEquals("expected to be equal", shardTermStatsRequest.getSize(), shardTermStatsRequest1.getSize());
     }
 

@@ -19,6 +19,7 @@ import org.elasticsearch.cluster.routing.ShardIterator;
 import org.elasticsearch.cluster.routing.ShardRouting;
 import org.elasticsearch.cluster.service.ClusterService;
 import org.elasticsearch.common.inject.Inject;
+import org.elasticsearch.common.io.stream.StreamInput;
 import org.elasticsearch.index.engine.Engine;
 import org.elasticsearch.index.shard.IndexShard;
 import org.elasticsearch.indices.IndicesService;
@@ -121,8 +122,8 @@ public class TransportTermStatsAction extends TransportBroadcastAction<TermStats
     }
 
     @Override
-    protected ShardTermStatsResponse newShardResponse() {
-        return new ShardTermStatsResponse(new LinkedHashMap<>());
+    protected ShardTermStatsResponse readShardResponse(StreamInput in) throws IOException {
+        return new ShardTermStatsResponse(in);
     }
 
     @Override
@@ -131,7 +132,7 @@ public class TransportTermStatsAction extends TransportBroadcastAction<TermStats
         Engine.Searcher searcher = indexShard.acquireSearcher("termstats");
         Map<String, TermStat> stringTermStatMap = new LinkedHashMap<>();
         try {
-            IndexReader indexReader = searcher.reader();
+            IndexReader indexReader = searcher.getIndexReader();
             Comparator<TermStats> termStatsComparator = request.getSortByTermFrequency() ? (Comparator<TermStats>) new HighFreqTerms.TotalTermFreqComparator() : new HighFreqTerms.DocFreqComparator();
 
             TermStats[] highFreqTerms = HighFreqTerms.getHighFreqTerms(indexReader, request.getSize(), request.getField(), termStatsComparator);
@@ -146,7 +147,7 @@ public class TransportTermStatsAction extends TransportBroadcastAction<TermStats
         } finally {
             searcher.close();
         }
-        return new ShardTermStatsResponse(stringTermStatMap);
+        return new ShardTermStatsResponse(request.shardId(), stringTermStatMap);
 
     }
 
