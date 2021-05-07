@@ -1,6 +1,10 @@
 group 'com.github.nirmalc'
-version '7.9.1'
+version '7.12.0'
 
+/*esplugin {
+  description 'The ES Termstat plugin retrieves term statistics.'
+  classname 'com.github.nirmalc.es.TermStatsPlugin'
+}*/
 
 ext {
     commonsLoggingVer = "1.1.3"
@@ -19,13 +23,12 @@ buildscript {
     }
 
     dependencies {
-        classpath "org.elasticsearch.gradle:build-tools:7.9.1"
+        classpath "org.elasticsearch.gradle:build-tools:7.12.0"
     }
 }
 
-
 apply plugin: 'java'
-apply plugin: 'idea'
+//apply plugin: 'idea'
 apply plugin: 'elasticsearch.esplugin'
 
 // license of this project
@@ -41,16 +44,14 @@ esplugin {
 }
 
 dependencies {
-    compile 'org.elasticsearch:elasticsearch:7.9.1'
+    compile 'org.elasticsearch:elasticsearch:7.12.0'
 }
-
-
 
 tasks.withType(JavaCompile) {
     options.warnings = false
 }
-checkstyleMain.enabled = true
-checkstyleTest.enabled = true
+//checkstyleMain.enabled = true
+//checkstyleTest.enabled = true
 
-dependencyLicenses.enabled = false
-thirdPartyAudit.enabled = false
+//dependencyLicenses.enabled = false
+//thirdPartyAudit.enabled = false

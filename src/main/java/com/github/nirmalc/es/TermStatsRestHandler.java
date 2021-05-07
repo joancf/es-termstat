@@ -16,6 +16,8 @@ import org.elasticsearch.rest.action.RestBuilderListener;
 
 import java.io.IOException;
 import java.util.List;
+import static java.util.Arrays.asList;
+import static java.util.Collections.unmodifiableList;
 
 import static org.elasticsearch.rest.RestRequest.Method.GET;
 import static org.elasticsearch.rest.action.RestActions.buildBroadcastShardsHeader;
@@ -24,17 +26,18 @@ public class TermStatsRestHandler extends BaseRestHandler {
 
     public TermStatsRestHandler(RestController controller) {
         super();
-        controller.registerHandler(this);
+        // controller.registerHandler(this);
     }
 
     @Override
     public String getName() {
-        return null;
+        return "es_termstat";
     }
 
     @Override
     public List<Route> routes() {
-        return null;
+        return unmodifiableList(asList(
+            new Route(GET, "/_termstat")));
     }
 
     RestChannel restChannel;
