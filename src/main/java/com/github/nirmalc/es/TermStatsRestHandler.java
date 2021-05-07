@@ -15,15 +15,16 @@ import org.elasticsearch.rest.RestStatus;
 import org.elasticsearch.rest.action.RestBuilderListener;
 
 import java.io.IOException;
+import java.util.List;
 
 import static org.elasticsearch.rest.RestRequest.Method.GET;
 import static org.elasticsearch.rest.action.RestActions.buildBroadcastShardsHeader;
 
 public class TermStatsRestHandler extends BaseRestHandler {
 
-    public TermStatsRestHandler(Settings settings, RestController controller) {
-        super(settings);
-        controller.registerHandler(GET, "/{index}/_termstat", this);
+    public TermStatsRestHandler(RestController controller) {
+        super();
+        controller.registerHandler(this);
     }
 
     @Override
@@ -31,6 +32,10 @@ public class TermStatsRestHandler extends BaseRestHandler {
         return null;
     }
 
+    @Override
+    public List<Route> routes() {
+        return null;
+    }
 
     RestChannel restChannel;
 

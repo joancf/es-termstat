@@ -57,9 +57,8 @@ public class TermStatsRequest extends BroadcastRequest<TermStatsRequest> {
         out.writeBoolean(sortByDocFrequency);
     }
 
-    @Override
-    public void readFrom(StreamInput in) throws IOException {
-        super.readFrom(in);
+    public TermStatsRequest(StreamInput in) throws IOException {
+        super(in);
         field = in.readString();
         size = in.readInt();
         sortByTermFrequency = in.readBoolean();

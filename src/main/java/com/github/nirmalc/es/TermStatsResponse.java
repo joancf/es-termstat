@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.LinkedHashMap;
 
-public class TermStatsResponse  extends BroadcastResponse{
+public class TermStatsResponse extends BroadcastResponse {
 
     private Map<String,TermStat> results;
     private long tookInNanoSeconds;
@@ -28,15 +28,14 @@ public class TermStatsResponse  extends BroadcastResponse{
     public void setTookInNanoSeconds(long took){
         tookInNanoSeconds = took;
     }
-    @Override
-    public void readFrom(StreamInput in) throws IOException {
-        super.readFrom(in);
+
+    public TermStatsResponse(StreamInput in) throws IOException {
+        super(in);
         int n = in.readInt();
         results = new LinkedHashMap<String, TermStat>();
         for (int i = 0; i < n; i++) {
             String text = in.readString();
-            TermStat t = new TermStat();
-            t.readFrom(in);
+            TermStat t = new TermStat(in);
             results.put(text, t);
         }
     }

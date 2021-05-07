@@ -22,7 +22,7 @@ public class TermStatsPlugin extends Plugin implements ActionPlugin {
                                              ClusterSettings clusterSettings, IndexScopedSettings indexScopedSettings,
                                              SettingsFilter settingsFilter, IndexNameExpressionResolver indexNameExpressionResolver,
                                              Supplier<DiscoveryNodes> nodesInCluster) {
-       return Arrays.asList(new TermStatsRestHandler(settings,restController));
+       return Arrays.asList(new TermStatsRestHandler(restController));
     }
 
     public List<ActionHandler<? extends ActionRequest, ? extends ActionResponse>> getActions() {

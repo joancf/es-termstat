@@ -1,11 +1,11 @@
 package com.github.nirmalc.es;
 
-import org.elasticsearch.action.Action;
+import org.elasticsearch.action.ActionType;
 import org.elasticsearch.action.ActionRequestBuilder;
 import org.elasticsearch.client.ElasticsearchClient;
 
 public class TermStatsRequestBuilder extends ActionRequestBuilder<TermStatsRequest,TermStatsResponse> {
-    protected TermStatsRequestBuilder(ElasticsearchClient client, Action<TermStatsResponse> action, TermStatsRequest request) {
+    protected TermStatsRequestBuilder(ElasticsearchClient client, ActionType<TermStatsResponse> action, TermStatsRequest request) {
         super(client, action, request);
     }
 

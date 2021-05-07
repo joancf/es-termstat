@@ -45,12 +45,10 @@ public class ShardTermStatsRequest extends BroadcastShardRequest {
         return request;
     }
 
-   @Override
-    public void readFrom(StreamInput in) throws IOException {
-        super.readFrom(in);
+    public ShardTermStatsRequest(StreamInput in) throws IOException {
+        super(in);
         index = new Index(in);
-        request = new TermStatsRequest();
-        request.readFrom(in);
+        request = new TermStatsRequest(in);
     }
 
     @Override
